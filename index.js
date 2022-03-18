@@ -29,13 +29,34 @@ async function run(){
             res.send(services);
         })
 
-       //showing single data
+       //showing single data(get api)
        app.get('/services/:id', async (req, res)=>{
            const id = req.params.id;
            const query = {_id: ObjectId(id)};
            const service = await serviceCollection.findOne(query);
            res.json(service);
        })
+
+    //GET API (Showing all Purchese Data) starts
+
+    app.get('/purchese', async(req,res)=>{
+        const cursor = purcheseCollection.find({});
+        const purchese = await cursor.toArray();
+        res.send(purchese);
+    })
+    //GET API (Showing all Purchese Data)ends
+
+        //GET API (Load specific Purchese data from database) starts
+        app.get('/purchese/:email', async (req,res)=>{
+            const email = req.params.email;
+            const query = {customerEmail : email}
+            const cursor = purcheseCollection.find(query);
+            const purchese = await cursor.toArray();
+            res.send(purchese);
+        })
+        //GET API (Load specific Purchese data from database) ends
+    
+        
 
 
         //POST api(Insert data operation)
