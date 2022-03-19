@@ -83,7 +83,7 @@ async function run(){
             res.json(result);
         });
 
-        //Delete operation
+        //Delete operation(Service) starts
 
         app.delete('/services/:id',async(req,res)=>{
             const id = req.params.id;
@@ -91,6 +91,20 @@ async function run(){
             const result = await serviceCollection.deleteOne(query);
             res.json(result);
         })
+
+        //Delete operation(Service) ends
+
+
+        //Delete operation(Purchese) starts
+
+        app.delete('/purchese/:id',async(req,res)=>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await purcheseCollection.deleteOne(query);
+            res.json(result);
+        })
+
+        //Delete operation(Purchese) ends
     }
     finally{
         // await client.close();
